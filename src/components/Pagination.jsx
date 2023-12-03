@@ -10,25 +10,24 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
 
   return (
     <div className='flex gap-2 my-2'>
-      <button className={'border border-gray-300 rounded-md px-2 py-1'+ (currentPage === 1) } onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
+      <button className='bg-white border border-gray-300 rounded-md px-2 py-1'  onClick={() => handlePageChange(1)} disabled={currentPage === 1}>
         First
       </button>
-      <button className='border border-gray-300 rounded-md px-2 py-1' onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+      <button className='bg-white border border-gray-300 rounded-md px-2 py-1' onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
         Previous
       </button>
       {[...Array(totalPages).keys()].map((page) => (
-        <button className='border border-gray-300 rounded-md px-2 py-1' key={page+1} onClick={() => handlePageChange(page+1)}>
+        <button className='bg-white border border-gray-300 rounded-md px-2 py-1' key={page+1} onClick={() => handlePageChange(page+1)}>
           {page+1}
         </button>
       ))}
-      <button className='border border-gray-300 rounded-md px-2 py-1' onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+      <button className='bg-white border border-gray-300 rounded-md px-2 py-1' onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
         Next
       </button>
-      <button className='border border-gray-300 rounded-md px-2 py-1' onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
+      <button className='bg-white border border-gray-300 rounded-md px-2 py-1' onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>
         Last
       </button>
     </div>
   );
 };
-
 export default Pagination;
