@@ -1,113 +1,476 @@
-import Image from 'next/image'
+"use client"
+
+import Pagination from "@/components/Pagination";
+import React, { useEffect, useState } from "react";
+import { XSquare, FileEdit, Trash, X, Save } from 'lucide-react'
+
+const fetchedUsers = [
+  {
+    "id": "1",
+    "name": "Aaron Miles",
+    "email": "aaron@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "2",
+    "name": "Aishwarya Naik",
+    "email": "aishwarya@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "3",
+    "name": "Arvind Kumar",
+    "email": "arvind@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "4",
+    "name": "Caterina Binotto",
+    "email": "caterina@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "5",
+    "name": "Chetan Kumar",
+    "email": "chetan@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "6",
+    "name": "Jim McClain",
+    "email": "jim@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "7",
+    "name": "Mahaveer Singh",
+    "email": "mahaveer@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "8",
+    "name": "Rahul Jain",
+    "email": "rahul@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "9",
+    "name": "Rizan Khan",
+    "email": "rizan@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "10",
+    "name": "Sarah Potter",
+    "email": "sarah@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "11",
+    "name": "Keshav Muddaiah",
+    "email": "keshav@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "12",
+    "name": "Nita Ramesh",
+    "email": "nita@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "13",
+    "name": "Julia Hunstman",
+    "email": "julia@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "14",
+    "name": "Juan Alonso",
+    "email": "juan@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "15",
+    "name": "Gabriel Montoya",
+    "email": "gabriel@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "16",
+    "name": "Beatrice Iglesias",
+    "email": "beatrice@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "17",
+    "name": "Sarah Symms",
+    "email": "sarah.s@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "18",
+    "name": "Patrick Pinheiro",
+    "email": "patrick@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "19",
+    "name": "Anand Patel",
+    "email": "anand@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "20",
+    "name": "Kishore Kalburgi",
+    "email": "kishore@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "21",
+    "name": "Rebecca Norris",
+    "email": "rebecca@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "22",
+    "name": "Özgür Başak",
+    "email": "ozgur@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "23",
+    "name": "Robin Andersen",
+    "email": "robin@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "24",
+    "name": "Nandini Kumar",
+    "email": "nandini@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "25",
+    "name": "Nikita Smith",
+    "email": "nikita@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "26",
+    "name": "Colton Doe",
+    "email": "colton@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "27",
+    "name": "Alain Senna",
+    "email": "alain@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "28",
+    "name": "Ashwin Jain",
+    "email": "ashwin@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "29",
+    "name": "Seema Bhatt",
+    "email": "seema@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "30",
+    "name": "Kayla Scarpinski",
+    "email": "kayla@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "31",
+    "name": "Ajay Ghosh",
+    "email": "ajay@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "32",
+    "name": "Chris Lindberg",
+    "email": "chris@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "33",
+    "name": "Christina Mourujärvi",
+    "email": "christina@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "34",
+    "name": "Mikhail Bill",
+    "email": "mikhail@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "35",
+    "name": "Eino Göregen",
+    "email": "eino@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "36",
+    "name": "Zachariah Johansson",
+    "email": "zacharaiah@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "37",
+    "name": "Aimaan Mohammed",
+    "email": "aimaan@mailinator.com",
+    "role": "admin"
+  },
+  {
+    "id": "38",
+    "name": "Aika Tsunoda",
+    "email": "aika@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "39",
+    "name": "Kimiko Minamoto",
+    "email": "kimiko@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "40",
+    "name": "Alyona Baginskaite",
+    "email": "alyona@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "41",
+    "name": "Anirudh Mukherjee",
+    "email": "anirudh@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "42",
+    "name": "Alyona Gov",
+    "email": "alyonagov@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "43",
+    "name": "Robin Singh",
+    "email": "robin@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "44",
+    "name": "Vijay Vasudevan",
+    "email": "vijayv@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "45",
+    "name": "Steve Smith",
+    "email": "steve@mailinator.com",
+    "role": "member"
+  },
+  {
+    "id": "46",
+    "name": "Anirudh Banerjee",
+    "email": "anirudhb@mailinator.com",
+    "role": "member"
+  }
+]
 
 export default function Home() {
+
+
+  
+
+  const [search, setSearch] = useState("");
+  const [users, setUsers] = useState(fetchedUsers);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageUsers, setCurrentPageUsers] = useState(users.slice(0, 10));
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [editMode, setEditMode] = useState(null);
+  const [editedUserData, setEditedUserData] = useState({name : '', email : '', role: ''});
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  }
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+
+    if (value === '') {
+      setCurrentPageUsers(users.slice(currentPage * 10 - 10, currentPage * 10));
+      setCurrentPage(1);
+    }
+  }
+
+  const handleEnterPress = (e) => {
+    if (e.code === 'Enter') {
+      console.log("Enter pressed");
+      const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(search.toLowerCase()) ||
+        user.email.toLowerCase().includes(search.toLowerCase()) ||
+        user.role.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredUsers(filteredUsers);
+      setCurrentPage(1);
+    }
+  }
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * 10;
+    const endIndex = startIndex + 10;
+    setCurrentPageUsers(filteredUsers.slice(startIndex, endIndex));
+  }, [filteredUsers]);
+
+  useEffect(() => {
+    setCurrentPageUsers(users.slice(currentPage * 10 - 10, currentPage * 10));
+  }, [currentPage, users])
+
+  const handleDelete = (userId) => {
+    const updatedUsers = users.filter((user) => user.id !== userId);
+    setUsers(updatedUsers);
+  };
+
+  const handleInputChange = (field, value) => {
+    setEditedUserData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  const handleSave = (userId) => {
+    setEditMode(null);
+    const updatedUsers = users.map((user) =>
+      user.id === userId ? { ...user, ...editedUserData } : user
+    );
+    setUsers(updatedUsers);
+    setEditedUserData({name : '', email : '', role: ''});
+  };
+
+  const handleCheckboxChange = (userId) => {
+    setSelectedRows((prevSelectedRows) =>
+      prevSelectedRows.includes(userId)
+        ? prevSelectedRows.filter((id) => id !== userId)
+        : [...prevSelectedRows, userId]
+    );
+  };
+
+  const handleSelectAll = () => {
+    setSelectAll(!selectAll);
+    setSelectedRows(selectAll ? [] : currentPageUsers.map((user) => user.id));
+  };
+
+  const deleteSelectedHandler = () => {
+    setUsers((prevUsers) =>
+      prevUsers.filter((user) => !selectedRows.includes(user.id))
+    );
+    setSelectAll(false);
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className="grid justify-items-center ">
+
+      <div className="my-8 flex  justify-between w-4/6">
+        <input type="text" className="  focus:outline-none border-2  border-gray-600 rounded-lg p-3 " onKeyDown={handleEnterPress} onChange={handleSearchChange} placeholder="Search" />
+        <button onClick={deleteSelectedHandler}><Trash color="red" /></button>
       </div>
+      <div className="w-4/6  ">
+        <table className="w-full border-collapse border-2 border-slate-400">
+          <thead>
+            <tr className="h-12" >
+              <th></th>
+              <th>
+                <input
+                  type="checkbox"
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                />
+              </th>
+              <th></th>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+              <th className="text-left ">Name</th>
+              <th className="text-left ">Email</th>
+              <th className="text-left ">Role</th>
+              <th className="text-left ">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentPageUsers.map((user) => (
+              <tr className=" h-12  border border-slate-700" key={user.id}>
+                <td></td>
+                <td className="border-y-2  text-center border-slate-400">
+                  <input
+                    type="checkbox"
+                    checked={selectedRows.includes(user.id)}
+                    onChange={() => handleCheckboxChange(user.id)}
+                  />
+                </td>
+                <td></td>
+                {
+                  editMode === user.id ?
+                    <>
+                      <td className="border-y-2 border-slate-400">
+                        <input
+                        className="focus:outline-none"
+                          type="text"
+                          value={editedUserData.name}
+                          placeholder={user.name}
+                          onChange={(e) => handleInputChange("name", e.target.value)}
+                        />
+                      </td>
+                      <td className="border-y-2 border-slate-400">
+                        <input
+                        className="focus:outline-none"
+                          type="email"
+                          value={editedUserData.email}
+                          placeholder={user.email}
+                          onChange={(e) => handleInputChange("email", e.target.value)}
+                        />
+                      </td>
+                      <td className="border-y-2 border-slate-400">
+                        <input
+                        className="focus:outline-none"
+                          type="text"
+                          value={editedUserData.role}
+                          placeholder={user.role}
+                          onChange={(e) => handleInputChange("role", e.target.value)}
+                        />
+                      </td>
+                    </> :
+                    <>
+                      <td className="border-y-2 border-slate-400">{user.name}</td>
+                      <td className="border-y-2 border-slate-400">{user.email}</td>
+                      <td className="border-y-2 border-slate-400">{user.role}</td>
+                    </>
+                }
+
+                {editMode === user.id ?
+                  <td className="border-y-2 border-slate-400">
+                    <button onClick={() => handleSave(user.id, { editedUserData })} ><Save color="gray" className="hover:bg-slate-900 fill-white rounded-sm transition-colors" ></Save></button>
+                    <button onClick={() => setEditMode(null)} ><X color="red" className="hover:bg-red-100 rounded-sm transition-colors" ></X></button>
+                  </td> :
+                  <td className="border-y-2 border-slate-400">
+                    <button onClick={() => setEditMode(user.id)} ><FileEdit color="black" className="hover:bg-green-100 fill-white rounded-sm transition-colors" ></FileEdit></button>
+                    <button onClick={() => handleDelete(user.id)} ><XSquare color="red" className="hover:bg-red-100 rounded-sm transition-colors" ></XSquare></button>
+                  </td>
+                }
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <Pagination currentPage={currentPage} totalItems={users.length} onPageChange={handlePageChange} />
     </main>
   )
 }
