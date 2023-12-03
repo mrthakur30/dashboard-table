@@ -4,7 +4,11 @@ import ActionButtons from './ActionButtons'
 const TableRow = ({ user, selectedRows, editMode, editedUserData, handleCheckboxChange, handleInputChange, handleSave, handleDelete, setEditMode }) => {
     return (
         <>
-            <tr className=" h-12  border border-slate-700" key={user.id}>
+            <tr 
+             className=  {`${
+                selectedRows.includes(user.id) ? 'bg-gray-200 h-12  border border-slate-700' : 'hover:bg-gray-100 h-12  border border-slate-700'
+              }`}
+             key={user.id}>
                 <td></td>
                 <td className="border-y-2  text-center border-slate-400">
                     <input
