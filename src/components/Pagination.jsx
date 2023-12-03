@@ -9,9 +9,9 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
   };
 
   return (
-    <div className='flex gap-2 my-2'>
+    <div className='absolute bottom-10 mx-auto flex h-8 gap-2 my-4'>
       <button
-        className='bg-white border border-gray-300 rounded-md px-2 py-1'
+         className={`${currentPage===1 ? 'bg-white hover:bg-slate-200 transition-colors opacity-25 border border-gray-300 rounded-md px-2 py-2' :'bg-white  hover:bg-slate-200 transition-colors border border-gray-300 rounded-md px-2 py-2' }$`}
         onClick={() => handlePageChange(1)}
         disabled={currentPage === 1}
       >
@@ -19,7 +19,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
       </button>
 
       <button
-        className='bg-white border border-gray-300 rounded-md px-2 py-1'
+        className={`${currentPage===1 ? 'bg-white hover:bg-slate-200 transition-colors opacity-25 border border-gray-300 rounded-md px-2 py-2' :'bg-white  hover:bg-slate-200 transition-colors border border-gray-300 rounded-md px-2 py-2' }$`}
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -28,7 +28,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
 
       {[...Array(totalPages).keys()].map((page) => (
         <button
-          className={`${currentPage===page+1 ? 'bg-white border border-gray-300 rounded-md px-2 py-1' :'bg-black text-white border border-gray-400 rounded-md px-2 py-1'}$`}
+          className={`${currentPage===page+1 ? 'bg-white border border-gray-300 rounded-md px-2 py-2' :'bg-black  transition-colors text-white border border-gray-400 rounded-md px-2 py-2'}$`}
           key={page + 1}
           onClick={() => handlePageChange(page + 1)}
         >
@@ -37,7 +37,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
       ))}
 
       <button
-        className='bg-white border border-gray-300 rounded-md px-2 py-1'
+         className={`${currentPage===totalPages ? 'bg-white hover:bg-slate-200 transition-colors opacity-25 border border-gray-300 rounded-md px-2 py-2' :'bg-white  hover:bg-slate-200 transition-colors border border-gray-300 rounded-md px-2 py-2' }$`}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
@@ -45,7 +45,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
       </button>
 
       <button
-        className='bg-white border border-gray-300 rounded-md px-2 py-1'
+        className={`${currentPage===totalPages ? 'bg-white hover:bg-slate-200 transition-colors opacity-25 border border-gray-300 rounded-md px-2 py-2' :'bg-white  hover:bg-slate-200 transition-colors border border-gray-300 rounded-md px-2 py-2' }$`} 
         onClick={() => handlePageChange(totalPages)}
         disabled={currentPage === totalPages}
       >

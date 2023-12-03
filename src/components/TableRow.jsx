@@ -6,7 +6,7 @@ const TableRow = ({ user, selectedRows, editMode, editedUserData, handleCheckbox
         <>
             <tr 
              className=  {`${
-                selectedRows.includes(user.id) ? 'bg-gray-200 h-12  border border-slate-700' : 'hover:bg-gray-100 h-12  border border-slate-700'
+                selectedRows.includes(user.id) ? 'bg-slate-300 h-12  border border-slate-500' : 'hover:bg-slate-100 h-12 transition-colors  border border-slate-700'
               }`}
              key={user.id}>
                 <td></td>
@@ -23,7 +23,7 @@ const TableRow = ({ user, selectedRows, editMode, editedUserData, handleCheckbox
                         <>
                             <td className="border-y-2 border-slate-400">
                                 <input
-                                    className="focus:outline-none"
+                                    className="  w-44 px-2 rounded group-[hover:bg-slate-200]: focus:outline-none"
                                     type="text"
                                     value={editedUserData.name}
                                     placeholder={user.name}
@@ -32,7 +32,7 @@ const TableRow = ({ user, selectedRows, editMode, editedUserData, handleCheckbox
                             </td>
                             <td className="border-y-2 border-slate-400">
                                 <input
-                                    className="focus:outline-none"
+                                    className="  w-44 px-2 rounded group-[hover:bg-slate-200]: focus:outline-none"
                                     type="email"
                                     value={editedUserData.email}
                                     placeholder={user.email}
@@ -41,7 +41,7 @@ const TableRow = ({ user, selectedRows, editMode, editedUserData, handleCheckbox
                             </td>
                             <td className="border-y-2 border-slate-400">
                                 <input
-                                    className="focus:outline-none"
+                                    className="  w-44 px-2 rounded group-[hover:bg-slate-200]: focus:outline-none"
                                     type="text"
                                     value={editedUserData.role}
                                     placeholder={user.role}

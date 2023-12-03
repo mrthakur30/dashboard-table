@@ -15,7 +15,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="grid justify-items-center ">
+    <main className=" flex-col flex items-center h-screen  ">
       {
         (fetchedUsers.length > 0) && <UserList fetchedUsers={fetchedUsers} />
       }

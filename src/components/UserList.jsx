@@ -101,7 +101,7 @@ const UserList = ({ fetchedUsers }) => {
                 handleSearchChange={handleSearchChange}
                 deleteSelectedHandler={deleteSelectedHandler}
             />
-            <div className="md:w-4/6  bg-white ">
+            <div className="md:w-4/6 flex  bg-white ">
                 <table className="w-full border-collapse border-2 border-slate-400">
                     <thead>
                         <tr className="h-12" >
